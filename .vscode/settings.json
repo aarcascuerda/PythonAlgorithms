@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/home/alex/.local/share/virtualenvs/PythonModules-MJRB2YGL/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "editor.detectIndentation": false,
+    "editor.tabCompletion": "on",
+}
