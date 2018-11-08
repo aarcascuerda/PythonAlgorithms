@@ -1,6 +1,5 @@
 import networkx as nx
 import random as ran
-import math
 
 
 def pref_atatchment(N, m=1):
@@ -41,15 +40,15 @@ def small_world(N, k=2, prob=0):
                     elif t == 1 and ran.random() <= prob and G.has_edge(i, j) == True:
                         while True:
                             choose = int(ran.random()*(N-1))
-                            if (i+choose) < N and G.has_edge(i, i+1+choose) == False:
+                            if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
                                 G.remove_edge(i, j)
                                 G.add_edge(i, i+1+choose)
-                                print(i, j, i+choose+1, "N<")
+#                                print(i, j, i+choose+1, "N<")
                                 break
-                            elif (i+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
+                            elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
                                 G.remove_edge(i, j)
                                 G.add_edge(i, i+1+choose-N)
-                                print(i, j, i+choose+1-N, "N")
+#                                print(i, j, i+choose+1-N, "N")
                                 break
                 elif j >= N:
                     if t == 0:
@@ -57,14 +56,14 @@ def small_world(N, k=2, prob=0):
                     elif t == 1 and ran.random() <= prob and G.has_edge(i, j-N) == True:
                         while True:
                             choose = int(ran.random()*(N-1))
-                            if (i+choose) < N and G.has_edge(i, i+1+choose) == False:
+                            if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
                                 G.remove_edge(i, j-N)
                                 G.add_edge(i, i+1+choose)
-                                print(i, j-N, i+choose+1, "N<")
+#                                print(i, j-N, i+choose+1, "N<")
                                 break
-                            elif (i+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
+                            elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
                                 G.remove_edge(i, j-N)
                                 G.add_edge(i, i+1+choose-N)
-                                print(i, j-N, i+choose+1-N, "N")
+#                                print(i, j-N, i+choose+1-N, "N")
                                 break
     return G

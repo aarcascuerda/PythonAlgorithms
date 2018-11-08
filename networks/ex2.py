@@ -1,13 +1,16 @@
 import createnetwork
 import matplotlib.pyplot as plt
 import networkx as nx
-import numpy as np
 
 spls = []
 cls = []
+xprob = []
 
 for a in range(100):
-    probability = 10**(-4*(1-a/float(100)))
+    if a != 0:
+        probability = 10**(-4*(1-a/float(100)))
+    elif a == 0:
+        probability = 0
     G = [createnetwork.small_world(250, k=4, prob=probability)
          for b in range(10)]
     clustering = 0.0
@@ -18,12 +21,12 @@ for a in range(100):
             G[i])/float(10)
     spls.append(shortestpathlength)
     cls.append(clustering)
+    xprob.append(probability)
 
 spls = [spls[x]/spls[0] for x in range(len(spls))]
 cls = [cls[x]/cls[0] for x in range(len(cls))]
 
-i = [x/float(100) for x in range(100)]
 plt.figure()
-plt.semilogx(i, cls, "ro")
-plt.semilogx(i, spls, "bo")
+plt.semilogx(xprob, cls, "ro")
+plt.semilogx(xprob, spls, "bo")
 plt.savefig("testing.png")
