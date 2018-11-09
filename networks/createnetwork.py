@@ -33,37 +33,22 @@ def small_world(N, k=2, prob=0):
     for t in range(2):
         for i in range(N):
             for j in range(i+1, i+1+int(k/2)):
-                if j < N:
-                    if t == 0:
-                        G.add_edge(i, j)
-                    # has_edge is the same as j in G[i] but without exceptions
-                    elif t == 1 and ran.random() <= prob and G.has_edge(i, j) == True:
-                        while True:
-                            choose = int(ran.random()*(N-1))
-                            if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
-                                G.remove_edge(i, j)
-                                G.add_edge(i, i+1+choose)
-#                                print(i, j, i+choose+1, "N<")
-                                break
-                            elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
-                                G.remove_edge(i, j)
-                                G.add_edge(i, i+1+choose-N)
-#                                print(i, j, i+choose+1-N, "N")
-                                break
-                elif j >= N:
-                    if t == 0:
-                        G.add_edge(i, j-N)
-                    elif t == 1 and ran.random() <= prob and G.has_edge(i, j-N) == True:
-                        while True:
-                            choose = int(ran.random()*(N-1))
-                            if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
-                                G.remove_edge(i, j-N)
-                                G.add_edge(i, i+1+choose)
-#                                print(i, j-N, i+choose+1, "N<")
-                                break
-                            elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
-                                G.remove_edge(i, j-N)
-                                G.add_edge(i, i+1+choose-N)
-#                                print(i, j-N, i+choose+1-N, "N")
-                                break
+                if j >= N:
+                    j = j-N
+                if t == 0:
+                    G.add_edge(i, j)
+                # has_edge is the same as j in G[i] but without exceptions
+                elif t == 1 and ran.random() <= prob and G.has_edge(i, j) == True:
+                    while True:
+                        choose = int(ran.random()*(N-1))
+                        if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
+                            G.remove_edge(i, j)
+                            G.add_edge(i, i+1+choose)
+#                           print(i, j, i+choose+1, "N<")
+                            break
+                        elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
+                            G.remove_edge(i, j)
+                            G.add_edge(i, i+1+choose-N)
+#                           print(i, j, i+choose+1-N, "N")
+                            break
     return G
