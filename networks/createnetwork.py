@@ -37,18 +37,14 @@ def small_world(N, k=2, prob=0):
                     j = j-N
                 if t == 0:
                     G.add_edge(i, j)
-                # has_edge is the same as j in G[i] but without exceptions
                 elif t == 1 and ran.random() <= prob and G.has_edge(i, j) == True:
                     while True:
                         choose = int(ran.random()*(N-1))
-                        if (i+1+choose) < N and G.has_edge(i, i+1+choose) == False:
+                        if (i+1+choose) >= N:
+                            choose = choose - N
+                        if G.has_edge(i, i+1+choose) == False:
                             G.remove_edge(i, j)
                             G.add_edge(i, i+1+choose)
-#                           print(i, j, i+choose+1, "N<")
-                            break
-                        elif (i+1+choose) >= N and G.has_edge(i, i+1+choose-N) == False:
-                            G.remove_edge(i, j)
-                            G.add_edge(i, i+1+choose-N)
-#                           print(i, j, i+choose+1-N, "N")
+#                           print(i, j, i+choose+1)
                             break
     return G
